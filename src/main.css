@@ -1,10 +1,12 @@
 :root {
-  --primary-color: #3498db;
-  --secondary-color: #2ecc71;
-  --accent-color: #e74c3c;
-  --background-color: #f5f5f5;
-  --text-color: #333333;
+  --background-color: #FFFFFF;
+  --card-background-color:#F5F5F7; 
+  --text-color: black;
+  --primary-color: #4F4FED;
+  --sucess-color: #25CA75;
+  --danger-color: #e74c3c;
   --border-color: #dddddd;
+  --details-color: #f3a83c;
 
   --font-family-base: 'Roboto', sans-serif;
   --font-size-base: 1rem; 

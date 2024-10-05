@@ -22,11 +22,17 @@
   --spacing-lg: 1.5rem; 
   --spacing-xl: 2rem; 
 
-  --navbar-height: 4rem;
+  --navbar-height: 5rem;
   --footer-height: 6rem;
 }
 
 html {
   font-size: 12px;
   font-family: var(--font-family-base);
+}
+
+
+body{
+  padding: 0rem;
+  margin: 0rem;
 }

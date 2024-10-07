@@ -3,7 +3,7 @@
     justify-content: space-between;
     align-items: center;
     height: var(--navbar-height);
-    background-color: var(--primary-color);
+    background-color: var(--background-color);
     padding: 0 var(--spacing-lg);
     color: var(--text-color);
     font-size: var(--font-size-base);
@@ -13,9 +13,10 @@
   
   .navbar-logo a {
     font-weight: var(--font-weight-bold);
-    color: white;
+    color: var(--text-color);
     text-decoration: none;
     font-size: var(--font-size-large);
+    margin-left: 3rem;
   }
   
   

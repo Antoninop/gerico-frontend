@@ -3,6 +3,7 @@
   --card-background-color:#F5F5F7; 
   --text-color: black;
   --primary-color: #4F4FED;
+  --primary-color-lighter: #6767ED;
   --sucess-color: #25CA75;
   --danger-color: #e74c3c;
   --border-color: #dddddd;
@@ -11,7 +12,7 @@
   --font-family-base: 'Roboto', sans-serif;
   --font-size-base: 1rem; 
   --font-size-small: 0.875rem; 
-  --font-size-large: 1.25rem; 
+  --font-size-large: 2.5rem; 
   --line-height-base: 1.6;
   --font-weight-regular: 400;
   --font-weight-bold: 700;

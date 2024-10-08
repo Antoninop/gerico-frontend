@@ -13,9 +13,9 @@
   --font-size-base: 1rem; 
   --font-size-small: 0.875rem; 
   --font-size-large: 2.5rem; 
+  --font-size-sidebar: 1.5rem;
   --line-height-base: 1.6;
-  --font-weight-regular: 400;
-  --font-weight-bold: 700;
+
 
   --spacing-xs: 0.25rem; 
   --spacing-sm: 0.5rem; 
@@ -25,6 +25,7 @@
 
   --navbar-height: 5rem;
   --footer-height: 6rem;
+  --sidebar-width: 18rem;
 }
 
 html {

@@ -1,0 +1,24 @@
+.sidebar {
+    width: var( --sidebar-width);
+    background-color: var(--card-background-color);
+    height: 100vh;
+    padding-left: 3rem;
+}
+
+.title {
+    font-size: var(--font-size-large); 
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+}
+
+.menuItem {
+    padding: 1.5rem 0;
+    cursor: pointer;
+    color: var(--primary-color);
+    font-size: var(--font-size-sidebar);
+}

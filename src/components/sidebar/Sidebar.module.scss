@@ -1,8 +1,8 @@
 .sidebar {
-    width: var( --sidebar-width);
+    width: var(--sidebar-width);
     background-color: var(--card-background-color);
     height: 100vh;
-    padding-left: 3rem;
+    padding-left:2rem;
 }
 
 .title {
@@ -17,8 +17,21 @@
 }
 
 .menuItem {
+    font-size: var(--font-size-sidebar);
     padding: 1.5rem 0;
     cursor: pointer;
-    color: var(--primary-color);
-    font-size: var(--font-size-sidebar);
+    color: var(--text-color);
+    &:hover {
+        color: var(--primary-color-lighter); 
+    }
+
+    svg {
+        font-size: var(--font-size-sidebar-icon);
+        margin-right: var(--spacing-md);
+        vertical-align: middle;
+    }
+}
+
+.selected {
+    color: var(--primary-color); 
 }

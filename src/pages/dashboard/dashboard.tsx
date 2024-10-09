@@ -1,19 +1,38 @@
+import { IoDocument, IoAirplane, IoPerson, IoBuildSharp } from "react-icons/io5";
+import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './dashboard.module.scss';
 import Sidebar from '../../components/sidebar/Sidebar';
-import { IoDocument,IoAirplane,IoPerson,IoBuildSharp } from "react-icons/io5";
+import { useEffect, useState } from 'react';
 
 const Dashboard: React.FC = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const [selectedItem, setSelectedItem] = useState<number | null>(null);
+
+    const items = [
+        { label: <><IoDocument /> Mes fiches de paie</>, route: '/fiches-paie' },
+        { label: <><IoAirplane /> Gerer mes congés</>, route: '/conges' },
+        { label: <><IoPerson /> Mon compte</>, route: '/compte' },
+        { label: <><IoBuildSharp /> Administration</>, route: '/administration' }
+    ];
+
+    useEffect(() => {
+        const currentRoute = location.pathname;
+        const selectedIndex = items.findIndex(item => item.route === currentRoute);
+        setSelectedItem(selectedIndex !== -1 ? selectedIndex : null);
+    }, [location.pathname]); 
+
+    const handleNavigate = (route: string) => {
+        navigate(route);
+    };
+
     return (
         <div className={styles.container}>
             <Sidebar 
-                items={[
-                    <><IoDocument /> Mes fiches de paie</>,
-                    <><IoAirplane /> Gerer mes congés</>,
-                    <><IoPerson /> Mon compte</>,
-                    <><IoBuildSharp /> Administration</>,
-                ]}
+                items={items.map(item => item.label)} 
+                selectedIndex={selectedItem} 
+                onItemClick={(index) => handleNavigate(items[index].route)} 
             />
-            <h1>test</h1>
         </div>
     );
 };

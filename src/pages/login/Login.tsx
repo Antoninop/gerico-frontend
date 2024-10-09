@@ -1,27 +1,36 @@
 import React, { useState } from 'react';
 import styles from './login.module.scss';
+import { useNavigate } from 'react-router-dom';
 import Input from '../../components/input/Input'; 
 import Navbar from '../../components/navbar/Navbar';
-import { loginUser } from '../../services/api'; 
+import { loginUser } from '../../services/api';
+import { useAuth } from '../../services/AuthContext'; 
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const [error, setError] = useState<string>('');
+    const [error, setError] = useState<string>(''); 
+    const { login } = useAuth(); 
+    const navigate = useNavigate();
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         console.log('Email:', email);
         console.log('Password:', password);
-
+    
         try {
-            await loginUser(email, password);
-            console.log('connecté'); 
+            const response = await loginUser(email, password);
+            console.log(response); 
+    
+            await login(response.userId); 
+    
+            navigate('/'); 
         } catch (err: any) {
             console.error('Erreur de connexion:', err);
-            setError(err.message); 
+            setError(err.response?.data?.message || 'Une erreur est survenue');
         }
     };
+    
 
     return (
         <div>
@@ -30,7 +39,7 @@ const Login: React.FC = () => {
             <div className={styles.loginContainer}>
                 <div className={styles.Container}>
                     <h2>Connexion au portail employé</h2>
-                    {error && <div className={styles.error}>{error}</div>} 
+                    {error && <div className={styles.error}>{error}</div>}
                     <form onSubmit={handleSubmit}>
                         <Input
                             type="email"

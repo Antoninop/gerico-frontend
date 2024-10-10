@@ -22,7 +22,7 @@ const Login: React.FC = () => {
             const response = await loginUser(email, password);
             console.log(response); 
     
-            await login(response.userId); 
+            await login({ id: response.userId, email }, response.token); 
     
             navigate('/'); 
         } catch (err: any) {

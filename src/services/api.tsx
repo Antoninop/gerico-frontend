@@ -4,10 +4,6 @@ export interface User {
   id?: number;
   email: string;
   password: string;
-  first_name?: string;
-  last_name?: string;
-  birthday?: string;
-  phone_number?: string;
 }
 
 export const post = async (endpoint: string, data: any) => {
@@ -31,10 +27,7 @@ export const post = async (endpoint: string, data: any) => {
   }
 };
 
-export const create = async (user: User) => {
-  return post('/users', user);
-};
-
 export const loginUser = async (email: string, password: string) => {
   return post('/login', { email, password });
 };
+

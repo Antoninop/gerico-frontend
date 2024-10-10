@@ -31,7 +31,7 @@ export const post = async (endpoint: string, data: any) => {
   }
 };
 
-export const createUser = async (user: User) => {
+export const create = async (user: User) => {
   return post('/users', user);
 };
 

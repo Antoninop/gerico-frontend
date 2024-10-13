@@ -13,9 +13,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   useEffect(() => {
     const token = sessionStorage.getItem('token');
-    const userId = sessionStorage.getItem('userId'); //TODO: change to userId to real userId 
-    if (token && userId) {
-      setUser({ id: Number(userId) });
+    const userId = sessionStorage.getItem('userId');
+    const email = sessionStorage.getItem('email'); 
+
+    if (token && userId && email) {
+      setUser({ id: Number(userId), email }); 
     }
   }, []);
 
@@ -23,12 +25,14 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setUser(userData);
     sessionStorage.setItem('token', token);
     sessionStorage.setItem('userId', String(userData.id));
+    sessionStorage.setItem('email', userData.email); 
   };
 
   const logout = () => {
     setUser(null);
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('userId');
+    sessionStorage.removeItem('email');
   };
 
   return (
@@ -41,7 +45,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth error');
+    throw new Error();
   }
   return context;
 };

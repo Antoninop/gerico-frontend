@@ -2,6 +2,7 @@ import './main.css';
 import Login from './pages/login/Login';
 import Conges from './pages/conges/conges';
 import Fiches from './pages/fiches/fiches';
+import CreateUser from './pages/admin/createUser/createUser';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'; 
 import { useAuth } from './services/AuthContext'; 
 
@@ -17,7 +18,7 @@ const App: React.FC = () => {
             <Route path="/fiches-paie" element={<Fiches />} />
             <Route path="/conges" element={<Conges />} />
             <Route path="/compte" element={<div>Mon compte</div>} />
-            <Route path="/administration" element={<div>Administration</div>} />
+            <Route path="/administration" element={<CreateUser/>} />
             <Route path="*" element={<Navigate to="/fiches-paie" />} />
           </>
         ) : (

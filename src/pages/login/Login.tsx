@@ -15,21 +15,22 @@ const Login: React.FC = () => {
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-        console.log('Email:', email);
-        console.log('Password:', password);
-    
         try {
             const response = await loginUser(email, password);
             console.log(response); 
-    
+            
+            if (response.token) {
+                sessionStorage.setItem('token', response.token);
+            }
+            
             await login({ id: response.userId, email }, response.token); 
-    
             navigate('/'); 
         } catch (err: any) {
             console.error('Erreur de connexion:', err);
             setError(err.response?.data?.message || 'Une erreur est survenue');
         }
     };
+    
     
 
     return (

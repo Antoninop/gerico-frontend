@@ -1,6 +1,60 @@
 .container {
-    display: flex;
-    justify-content: start;
-      align-content: center;
-      flex-direction: row;
+  padding: var(--spacing-md);
+  margin-left: var(--sidebar-width); 
+}
+
+h1 {
+  font-size: var(--font-size-large);
+  margin-bottom: var(--spacing-lg); 
+  padding-left: calc(var(--sidebar-width) / 6);
+}
+
+.payrollTitles {
+  display: flex; 
+  justify-content: space-between; 
+  margin-bottom: var(--spacing-sm); 
+  padding: calc(var(--sidebar-width) / 6);
+  padding-bottom: 2.5rem;
+  padding-right: 10rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.scrollableArea {
+  max-height: 45rem;  
+  overflow-y: auto;   
+}
+
+.payrollList {
+  list-style-type: none;
+  padding: 0; 
+  padding-left: calc(var(--sidebar-width) / 6);
+}
+
+.payrollItem {
+  padding: var(--spacing-md) 0; 
+
+  span {
+    font-weight: 600;
   }
+}
+
+.test{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color); 
+  padding-right: 10rem;
+
+}
+
+.dl{
+  width: 5rem;
+  height: 5rem;
+  background-color: yellow;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}

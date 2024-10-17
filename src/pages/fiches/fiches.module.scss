@@ -14,14 +14,25 @@ h1 {
   justify-content: space-between; 
   margin-bottom: var(--spacing-sm); 
   padding: calc(var(--sidebar-width) / 6);
-  padding-bottom: 2.5rem;
+  padding-top: 1.5rem;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.payrollsubTitles {
+  display: flex; 
+  justify-content: space-between; 
+  margin-bottom: var(--spacing-sm); 
+  padding: calc(var(--sidebar-width) / 6);
+  padding-top: 0rem;
+  padding-bottom: 2rem;
   padding-right: 10rem;
   font-size: 1.25rem;
   font-weight: 600;
 }
 
 .scrollableArea {
-  max-height: 45rem;  
+  max-height: 42.5rem;  
   overflow-y: auto;   
 }
 
@@ -39,22 +50,39 @@ h1 {
   }
 }
 
-.test{
+.PayrollContainer{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--border-color); 
   padding-right: 10rem;
-
 }
 
-.dl{
-  width: 5rem;
-  height: 5rem;
-  background-color: yellow;
+.dlbtn{
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  svg{
+    font-size: 1.8rem;
+    font-weight: 200;
+  }
+}
+
+.btnDLall{
+display: flex;
+align-items: center;
+justify-content: center;
+width: 10rem;
+background-color: var(--primary-color);
+color: white;
+border: none;
+border-radius: 0.5rem;
+font-size: 1rem;
+cursor: pointer;
+}
+
+.btnDLall:hover{
+  background-color: var(--primary-color-lighter);
 }

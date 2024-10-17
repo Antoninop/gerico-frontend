@@ -2,6 +2,7 @@ import styles from './fiches.module.scss';
 import Dashboard from '../dashboard/dashboard';
 import { fetchPayroll } from '../../services/api'; 
 import { useEffect, useState } from 'react';
+import { GoDownload } from "react-icons/go";
 
 interface Payroll {
   paye_id: number;
@@ -30,20 +31,31 @@ const Fiches: React.FC = () => {
     fetchPayrollData();  
   }, []);  
 
-  const handleDownload = (filePath?: string) => {
+  const handleDownload = (filePath: string) => {
     if (filePath) {
+      const link = document.createElement('a');
+      link.href = filePath;
+      link.setAttribute('download', ''); 
+      document.body.appendChild(link);
+      link.click(); 
+      document.body.removeChild(link); 
       console.log(`Downloading from: ${filePath}`);
-      // Add logic to handle file download here
     } else {
       console.warn('File path is missing');
     }
-  }
+  };
+  
 
   return (
     <div className={styles.container}>
       <Dashboard />
-      
+
       <div className={styles.payrollTitles}>
+        <div>Bonjour et bienvenue , Prénom 👋</div>
+        <div className={styles.btnDLall}>Tout télécharger</div>
+      </div>
+      
+      <div className={styles.payrollsubTitles}>
         <div>Fiches de paie</div>
         <div>Trier par </div>
       </div>
@@ -57,16 +69,16 @@ const Fiches: React.FC = () => {
                 return dateB.getTime() - dateA.getTime(); 
               })
               .map((payroll) => (
-                <div className={styles.test}>
+                <div className={styles.PayrollContainer}>
                 <li key={payroll.paye_id} className={styles.payrollItem}>
                   <span>Paie ID:</span> {payroll.paye_id} <br />
-                  <span>Date de paie:</span> {payroll.pay_date} <br />
+                  <span>Date:</span> {payroll.pay_date} <br />
                   <span>Salaire:</span> {payroll.salary} <br />
                 </li>
-                <div className={styles.dl} 
+                <div className={styles.dlbtn} 
                  onClick={() => handleDownload(payroll.file_path)}
                   >
-                    test
+                    <GoDownload/>
                 </div>
               </div>
               ))}

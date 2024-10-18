@@ -3,6 +3,7 @@ import Dashboard from '../dashboard/dashboard';
 import { fetchPayroll } from '../../services/api'; 
 import { useEffect, useState } from 'react';
 import { GoDownload } from "react-icons/go";
+import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
 
 interface Payroll {
   paye_id: number;
@@ -13,6 +14,7 @@ interface Payroll {
 
 const Fiches: React.FC = () => {
   const [payrollData, setPayrollData] = useState<Payroll[]>([]);  
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc'); 
 
   useEffect(() => {
     const fetchPayrollData = async () => {
@@ -44,44 +46,59 @@ const Fiches: React.FC = () => {
       console.warn('File path is missing');
     }
   };
-  
+
+  const toggleSortOrder = () => {
+    setSortOrder(prevOrder => (prevOrder === 'desc' ? 'asc' : 'desc')); 
+  };
+
+  const sortedPayrollData = [...payrollData].sort((a, b) => {
+    const dateA = new Date(a.pay_date).getTime();
+    const dateB = new Date(b.pay_date).getTime();
+    return sortOrder === 'desc' ? dateB - dateA : dateA - dateB; 
+  });
 
   return (
     <div className={styles.container}>
       <Dashboard />
 
       <div className={styles.payrollTitles}>
-        <div>Bonjour et bienvenue , Prénom 👋</div>
+        <div>Bonjour, Prénom 👋</div>
         <div className={styles.btnDLall}>Tout télécharger</div>
       </div>
       
       <div className={styles.payrollsubTitles}>
         <div>Fiches de paie</div>
-        <div>Trier par </div>
+        <div className={styles.sortButton} onClick={toggleSortOrder}>
+          Trier par {sortOrder === 'desc' ? 'plus ancien' : 'plus récent'} 
+          {sortOrder === 'desc' ? <FaArrowDown /> : <FaArrowUp />} 
+        </div>
       </div>
-      {payrollData.length > 0 ? (
+
+      {sortedPayrollData.length > 0 ? (
         <div className={styles.scrollableArea}>
           <ul className={styles.payrollList}>
-            {payrollData
-              .sort((a, b) => {
-                const dateA = new Date(a.pay_date);
-                const dateB = new Date(b.pay_date);
-                return dateB.getTime() - dateA.getTime(); 
-              })
-              .map((payroll) => (
-                <div className={styles.PayrollContainer}>
-                <li key={payroll.paye_id} className={styles.payrollItem}>
-                  <span>Paie ID:</span> {payroll.paye_id} <br />
-                  <span>Date:</span> {payroll.pay_date} <br />
-                  <span>Salaire:</span> {payroll.salary} <br />
-                </li>
-                <div className={styles.dlbtn} 
-                 onClick={() => handleDownload(payroll.file_path)}
+            {sortedPayrollData.map((payroll) => {
+              const payDate = new Date(payroll.pay_date);
+              const month = payDate.toLocaleString('default', { month: 'short' }).toUpperCase(); 
+              const year = payDate.getFullYear(); 
+              return (
+                <div className={styles.PayrollContainer} key={payroll.paye_id}>
+                  <div className={styles.PayrollDate}>
+                    <div>{month}</div>  
+                    <div>{year}</div>  
+                  </div>
+                  <li className={styles.payrollItem}>
+                    <span>Paie ID:</span> {payroll.paye_id} <br />
+                    <span>Salaire:</span> {payroll.salary} <br />
+                  </li>
+                  <div className={styles.dlbtn} 
+                    onClick={() => handleDownload(payroll.file_path)}
                   >
-                    <GoDownload/>
+                    <GoDownload />
+                  </div>
                 </div>
-              </div>
-              ))}
+              );
+            })}
           </ul>
         </div>
       ) : (

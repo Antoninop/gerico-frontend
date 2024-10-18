@@ -13,9 +13,9 @@ const isTokenExpired = (token: string) => {
   try {
     const payload = JSON.parse(atob(token.split('.')[1]));
     const expiry = payload.exp;
-    return (Math.floor(Date.now() / 1000) >= expiry); 
+    return Math.floor(Date.now() / 1000) >= expiry;
   } catch (error) {
-    return true; 
+    return true;
   }
 };
 
@@ -25,11 +25,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   useEffect(() => {
     const token = sessionStorage.getItem('token');
     const userId = sessionStorage.getItem('userId');
-    const email = sessionStorage.getItem('email'); 
+    const email = sessionStorage.getItem('email');
 
     if (token && userId && email) {
       if (isTokenExpired(token)) {
-        logout();
+        logout(); 
       } else {
         setUser({ id: Number(userId), email });
       }
@@ -40,7 +40,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setUser(userData);
     sessionStorage.setItem('token', token);
     sessionStorage.setItem('userId', String(userData.id));
-    sessionStorage.setItem('email', userData.email); 
+    sessionStorage.setItem('email', userData.email);
   };
 
   const logout = () => {
@@ -59,5 +59,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error();
+  }
   return context;
 };

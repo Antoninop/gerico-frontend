@@ -12,9 +12,10 @@ h1 {
 .payrollTitles {
   display: flex; 
   justify-content: space-between; 
-  margin-bottom: var(--spacing-sm); 
   padding: calc(var(--sidebar-width) / 6);
-  padding-top: 1.5rem;
+  padding-top: 2.5rem;
+  padding-bottom: 1.5rem;
+  padding-right: 3.5rem;
   font-size: 2rem;
   font-weight: 600;
 }
@@ -22,17 +23,13 @@ h1 {
 .payrollsubTitles {
   display: flex; 
   justify-content: space-between; 
-  margin-bottom: var(--spacing-sm); 
-  padding: calc(var(--sidebar-width) / 6);
-  padding-top: 0rem;
-  padding-bottom: 2rem;
-  padding-right: 10rem;
+  padding: calc(var(--sidebar-width) / 6) 3.5rem 2.5rem calc(var(--sidebar-width) / 6);
   font-size: 1.25rem;
   font-weight: 600;
 }
 
 .scrollableArea {
-  max-height: 42.5rem;  
+  max-height: 43rem;  
   overflow-y: auto;   
 }
 
@@ -50,7 +47,7 @@ h1 {
   }
 }
 
-.PayrollContainer{
+.PayrollContainer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -59,30 +56,88 @@ h1 {
   padding-right: 10rem;
 }
 
-.dlbtn{
+.dlbtn {
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  svg{
+  
+  svg {
+    font-size: 1.8rem;
+    font-weight: 200;
+    padding-right: 3rem;
+  }
+
+  svg:hover {
+    color: var(--primary-color);
+  }
+}
+
+.btnDLall {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btnDLall:hover {
+  background-color: var(--primary-color-lighter);
+}
+
+.PayrollContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--spacing-md);
+}
+
+.leftText {
+  flex: 1;
+}
+
+.payrollItem {
+  flex: 2;
+  padding: var(--spacing-md) 0;
+  
+  span {
+    font-weight: 600;
+  }
+}
+
+.dlbtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  svg {
     font-size: 1.8rem;
     font-weight: 200;
   }
 }
 
-.btnDLall{
-display: flex;
-align-items: center;
-justify-content: center;
-width: 10rem;
-background-color: var(--primary-color);
-color: white;
-border: none;
-border-radius: 0.5rem;
-font-size: 1rem;
-cursor: pointer;
+.PayrollDate {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  margin-right: 3rem;
+  font-size: 1rem; 
+  font-weight: 600;
 }
 
-.btnDLall:hover{
-  background-color: var(--primary-color-lighter);
+.sortButton  {
+  cursor: pointer;
+  svg {
+    font-size: 1.15rem;
+    font-weight: 200;
+    text-align: center;
+    margin-left: .5rem;
+  }
 }

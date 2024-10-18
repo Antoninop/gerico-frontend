@@ -3,11 +3,19 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './dashboard.module.scss';
 import Sidebar from '../../components/sidebar/Sidebar';
 import { useEffect, useState } from 'react';
+import { BiExit } from "react-icons/bi";
+import { useAuth } from '../../services/AuthContext';
+
 
 const Dashboard: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const [selectedItem, setSelectedItem] = useState<number | null>(null);
+    const { logout } = useAuth();
+
+    const handleLogout = () => {
+        logout();
+      };
 
     const items = [
         { label: <><IoDocument /> Mes fiches de paie</>, route: '/fiches-paie' },
@@ -32,6 +40,7 @@ const Dashboard: React.FC = () => {
                 items={items.map(item => item.label)} 
                 selectedIndex={selectedItem} 
                 onItemClick={(index) => handleNavigate(items[index].route)} 
+                bottomContent={<div className={styles.bottomContent} onClick={handleLogout}><BiExit/>Déconnexion</div>}
             />
         </div>
     );

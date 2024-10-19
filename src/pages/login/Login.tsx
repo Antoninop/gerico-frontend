@@ -21,6 +21,7 @@ const Login: React.FC = () => {
             
             if (response.token) {
                 sessionStorage.setItem('token', response.token);
+                sessionStorage.setItem('firstname', response.firstname);
             }
             
             await login({ id: response.userId, email }, response.token); 

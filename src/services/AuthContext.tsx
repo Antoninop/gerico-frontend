@@ -39,14 +39,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const login = (userData: { id: number; email: string }, token: string) => {
     setUser(userData);
     sessionStorage.setItem('token', token);
-    sessionStorage.setItem('userId', String(userData.id));
     sessionStorage.setItem('email', userData.email);
   };
 
   const logout = () => {
     setUser(null);
     sessionStorage.removeItem('token');
-    sessionStorage.removeItem('userId');
     sessionStorage.removeItem('email');
   };
 

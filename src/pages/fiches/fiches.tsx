@@ -1,5 +1,6 @@
 import styles from './fiches.module.scss';
 import Dashboard from '../dashboard/dashboard';
+import Loading from '../../components/loading/Loading';  
 import { fetchPayroll } from '../../services/api'; 
 import { useEffect, useState } from 'react';
 import { GoDownload } from "react-icons/go";
@@ -15,6 +16,8 @@ interface Payroll {
 const Fiches: React.FC = () => {
   const [payrollData, setPayrollData] = useState<Payroll[]>([]);  
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc'); 
+  const [loading, setLoading] = useState(true);  
+  const [firstname] = useState(sessionStorage.getItem('firstname') || '');
 
   useEffect(() => {
     const fetchPayrollData = async () => {
@@ -27,6 +30,8 @@ const Fiches: React.FC = () => {
         }
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false);  
       }
     };
 
@@ -62,7 +67,7 @@ const Fiches: React.FC = () => {
       <Dashboard />
 
       <div className={styles.payrollTitles}>
-        <div>Bonjour, Prénom 👋</div>
+        <div>Bonjour, {firstname} 👋</div>
         <div className={styles.btnDLall}>Tout télécharger</div>
       </div>
       
@@ -74,35 +79,39 @@ const Fiches: React.FC = () => {
         </div>
       </div>
 
-      {sortedPayrollData.length > 0 ? (
-        <div className={styles.scrollableArea}>
-          <ul className={styles.payrollList}>
-            {sortedPayrollData.map((payroll) => {
-              const payDate = new Date(payroll.pay_date);
-              const month = payDate.toLocaleString('default', { month: 'short' }).toUpperCase(); 
-              const year = payDate.getFullYear(); 
-              return (
-                <div className={styles.PayrollContainer} key={payroll.paye_id}>
-                  <div className={styles.PayrollDate}>
-                    <div>{month}</div>  
-                    <div>{year}</div>  
-                  </div>
-                  <li className={styles.payrollItem}>
-                    <span>Paie ID:</span> {payroll.paye_id} <br />
-                    <span>Salaire:</span> {payroll.salary} <br />
-                  </li>
-                  <div className={styles.dlbtn} 
-                    onClick={() => handleDownload(payroll.file_path)}
-                  >
-                    <GoDownload />
-                  </div>
-                </div>
-              );
-            })}
-          </ul>
-        </div>
+      {loading ? (  
+        <Loading />  
       ) : (
-        <p>Aucune fiche de paie trouvée.</p>
+        sortedPayrollData.length > 0 ? (
+          <div className={styles.scrollableArea}>
+            <ul className={styles.payrollList}>
+              {sortedPayrollData.map((payroll) => {
+                const payDate = new Date(payroll.pay_date);
+                const month = payDate.toLocaleString('default', { month: 'short' }).toUpperCase(); 
+                const year = payDate.getFullYear(); 
+                return (
+                  <div className={styles.PayrollContainer} key={payroll.paye_id}>
+                    <div className={styles.PayrollDate}>
+                      <div>{month}</div>  
+                      <div>{year}</div>  
+                    </div>
+                    <li className={styles.payrollItem}>
+                      <span>Paie ID:</span> {payroll.paye_id} <br />
+                      <span>Salaire:</span> {payroll.salary} <br />
+                    </li>
+                    <div className={styles.dlbtn} 
+                      onClick={() => handleDownload(payroll.file_path)}
+                    >
+                      <GoDownload />
+                    </div>
+                  </div>
+                );
+              })}
+            </ul>
+          </div>
+        ) : (
+          <p>Aucune fiche de paie trouvée , revenez plus tard.</p>
+        )
       )}
     </div>
   );

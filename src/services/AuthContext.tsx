@@ -25,13 +25,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   useEffect(() => {
     const token = sessionStorage.getItem('token');
     const userId = sessionStorage.getItem('userId');
-    const email = sessionStorage.getItem('email');
 
-    if (token && userId && email) {
+    if (token) {
       if (isTokenExpired(token)) {
         logout(); 
       } else {
-        setUser({ id: Number(userId), email });
+        setUser({ id: Number(userId)});
       }
     }
   }, []);
@@ -39,13 +38,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const login = (userData: { id: number; email: string }, token: string) => {
     setUser(userData);
     sessionStorage.setItem('token', token);
-    sessionStorage.setItem('email', userData.email);
   };
 
   const logout = () => {
     setUser(null);
     sessionStorage.removeItem('token');
-    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('firstname');
   };
 
   return (

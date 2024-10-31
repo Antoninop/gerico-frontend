@@ -19,7 +19,7 @@ const Dashboard: React.FC = () => {
 
     const items = [
         { label: <><IoDocument /> Mes fiches de paie</>, route: '/fiches-paie' },
-        { label: <><IoAirplane /> Gerer mes congés</>, route: '/conges' },
+        { label: <><IoAirplane /> Gérer mes congés</>, route: '/conges' },
         { label: <><IoPerson /> Mon compte</>, route: '/compte' },
         { label: <><IoBuildSharp /> Administration</>, route: '/administration' }
     ];

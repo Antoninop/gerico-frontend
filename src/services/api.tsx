@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000/api';
+const BASE_URL = 'http://127.0.0.1:3005/api'; 
 
 export interface User {
   id?: number;

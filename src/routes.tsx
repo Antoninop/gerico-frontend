@@ -2,9 +2,9 @@ import './main.css';
 import Login from './pages/login/Login';
 import Conges from './pages/conges/conges';
 import Fiches from './pages/fiches/fiches';
-import Admin from './pages/admin/admin'
+import Admin from './pages/admin/admin';
 import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom'; 
-import { AuthProvider, useAuth } from './services/AuthContext'; 
+import { useAuth } from './services/AuthContext'; 
 import { useEffect } from 'react';
 
 const AppRoutes: React.FC = () => {
@@ -27,7 +27,7 @@ const AppRoutes: React.FC = () => {
           <Route path="/fiches-paie" element={<Fiches />} />
           <Route path="/conges" element={<Conges />} />
           <Route path="/compte" element={<div>Mon compte</div>} />
-          <Route path="/administration" element={<Admin/>} />
+          <Route path="/administration" element={<Admin />} />
           <Route path="*" element={<Navigate to="/fiches-paie" />} />
         </>
       ) : (
@@ -44,9 +44,7 @@ const AppRoutes: React.FC = () => {
 const App: React.FC = () => {
   return (
     <Router>
-      <AuthProvider>
-        <AppRoutes />
-      </AuthProvider>
+      <AppRoutes />
     </Router>
   );
 };

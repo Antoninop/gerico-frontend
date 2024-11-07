@@ -34,9 +34,31 @@ h2 {
     }
 }
 
-.passwordforgot{
+.labelContainer{
+    margin-top: 1rem;
+}
+
+
+.passwordForgot{
+        margin-top: .8rem;
+        margin-bottom: 0.4rem;
+        font-weight: 800;
+        font-size: 1.4rem;
+        color: #555;
+}
+
+.passwordForgotContainer {
     text-align: center;
     margin-top: 1.5rem;
-    color: var(--primary-color);
+}
+
+.passwordForgotLink {
+    color: #A0A7AF;
+    font-weight: 700;
     font-size: 1.2rem;
+    margin-left: 1rem;
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
 }

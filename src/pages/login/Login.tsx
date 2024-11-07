@@ -41,25 +41,29 @@ const Login: React.FC = () => {
                     <h2>Connexion au portail employé</h2>
                     {error && <div className={styles.error}>{error}</div>}
                     <form onSubmit={handleSubmit}>
-                        <Input
-                            type="email"
-                            id="email"
-                            label="Adresse email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                        <Input
-                            type="password"
-                            id="password"
-                            label="Mot de passe"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                        <button type="submit" className={styles.submitButton}>Connexion à votre compte</button>
-                        <div className={styles.passwordforgot}>Mot de passe oublié</div>
-                    </form>
+                    <Input
+                        type="email"
+                        id="email"
+                        label="Adresse email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                    <div className={styles.labelContainer}>
+                        <label htmlFor="password" className={styles.passwordForgot}>Mot de passe</label>
+                        <a href="/forgot-password" className={styles.passwordForgotLink}>Mot de passe oublié ?</a>
+                    </div>
+                    <Input
+                        label=''
+                        type="password"
+                        id="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                    <button type="submit" className={styles.submitButton}>Connexion à votre compte</button>
+                </form>
+
                 </div>
             </div>
         </div>

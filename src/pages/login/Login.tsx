@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './login.module.scss';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Input from '../../components/input/Input'; 
 import Navbar from '../../components/navbar/Navbar';
 import { loginUser } from '../../services/api';
@@ -18,13 +18,10 @@ const Login: React.FC = () => {
         event.preventDefault();
         try {
             const response = await loginUser(email, password);
-            console.log(response); 
-            
             if (response.token) {
                 sessionStorage.setItem('token', response.token);
                 sessionStorage.setItem('firstname', response.firstname);
             }
-            
             await login({ id: response.userId, email }, response.token); 
             navigate('/'); 
         } catch (err: any) {
@@ -32,11 +29,10 @@ const Login: React.FC = () => {
             setError(err.response?.data?.message || 'Une erreur est survenue');
         }
     };
-    
+
     return (
         <div>
             <Navbar />
-
             <div className={styles.loginContainer}>
                 <div className={styles.Container}>
                     <div className={styles.loginLogo}><RiHome2Line /></div>
@@ -53,7 +49,7 @@ const Login: React.FC = () => {
                         />
                         <div className={styles.labelContainer}>
                             <label htmlFor="password" className={styles.passwordForgot}>Mot de passe</label>
-                            <a href="/forgot-password" className={styles.passwordForgotLink}>Mot de passe oublié ?</a>
+                            <Link to="/requete-motdepasse" className={styles.passwordForgotLink}>Mot de passe oublié ?</Link>
                         </div>
                         <Input
                             label=''

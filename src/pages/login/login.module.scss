@@ -6,17 +6,34 @@
 }
 
 .Container {
-    width: 32rem;
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    width: 100%;
     margin: 0 auto;
     padding: 3rem;
+}
+
+.loginLogo {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    font-size: 2.25rem; 
+    border: 1px solid #e0e0e0; 
+    padding: .75rem;
+    border-radius: 8px; 
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    background-color: #fff;
 }
 
 h2 {
     text-align: center;
     color: #333;
-    margin-bottom: 4.5rem;
+    margin-bottom: 2.5rem;
     font-size: 1.75rem;
 }
+
 
 .submitButton {
     margin-top: 1.75rem;

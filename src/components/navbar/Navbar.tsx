@@ -7,7 +7,6 @@ const Navbar: React.FC = () => {
       <div className="navbar-logo">
         <a href="/">Gerico</a>
       </div>
-
     </nav>
   );
 };

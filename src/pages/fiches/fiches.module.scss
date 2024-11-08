@@ -86,9 +86,6 @@ h1 {
   cursor: pointer;
 }
 
-.btnDLall:hover {
-  background-color: var(--primary-color-lighter);
-}
 
 .PayrollContainer {
   display: flex;
@@ -96,10 +93,6 @@ h1 {
   align-items: center;
   border-bottom: 1px solid var(--border-color);
   padding: var(--spacing-md);
-}
-
-.leftText {
-  flex: 1;
 }
 
 .payrollItem {

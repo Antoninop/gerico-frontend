@@ -4,7 +4,8 @@ import Conges from './pages/conges/conges';
 import Fiches from './pages/fiches/fiches';
 import Admin from './pages/admin/admin';
 import ForgotPassword from './pages/login/ForgotPassword/ForgotPassword';
-import PasswordRequest from './pages/login/PasswordRequest/PasswordRequest'
+import PasswordRequest from './pages/login/PasswordRequest/PasswordRequest';
+import NewPassword from './pages/login/NewPassword/NewPassword';
 import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom'; 
 import { useAuth } from './services/AuthContext'; 
 import { useEffect } from 'react';
@@ -17,7 +18,7 @@ const AppRoutes: React.FC = () => {
   useEffect(() => {
     const token = sessionStorage.getItem('token');
     
-    const isPublicRoute = ['/login', '/requete-motdepasse','/confirmation-renit'].includes(location.pathname);    
+    const isPublicRoute = ['/login', '/requete-motdepasse','/confirmation-renit' , '/nouveau-motdepasse'].includes(location.pathname);    
     if (!isPublicRoute && (!token || isTokenExpired())) {
       logout();
       navigate('/login');
@@ -40,6 +41,7 @@ const AppRoutes: React.FC = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/requete-motdepasse" element={<ForgotPassword />} />
           <Route path="/confirmation-renit" element={<PasswordRequest/>}/>
+          <Route path="/nouveau-motdepasse" element={<NewPassword/>}/>
           <Route path="*" element={<Navigate to="/login" />} />
         </>
       )}

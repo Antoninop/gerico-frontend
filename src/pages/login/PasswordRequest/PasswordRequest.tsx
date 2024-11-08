@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Input from '../../../components/input/Input'; 
 import Navbar from '../../../components/navbar/Navbar';
 import styles from './PasswordRequest.module.scss';
 import { IoMdArrowBack } from "react-icons/io";
@@ -34,7 +33,7 @@ const PasswordRequest: React.FC = () => {
         event.preventDefault();
         console.log("Code:", code.join(''));
         try {
-            //tt
+            navigate('/nouveau-motdepasse');
         } catch (err: any) {
             console.error('Erreur de connexion:', err);
         }

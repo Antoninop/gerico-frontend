@@ -27,6 +27,7 @@
   --navbar-height: 5rem;
   --footer-height: 6rem;
   --sidebar-width: 22.5rem;
+
 }
 
 html {
@@ -39,4 +40,12 @@ html {
 body{
   padding: 0rem;
   margin: 0rem;
+}
+
+.Toastify__toast--success {
+  font-weight: 600;
+}
+
+.Toastify__progress-bar--success {
+  background-color: var(--primary-color) !important;
 }

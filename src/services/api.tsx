@@ -142,3 +142,7 @@ export const createUser = async (userData: UserForm) => {
 export const fetchPayroll = async () => {
   return get('/fetchPayroll');
 };
+
+export const fetchHolidayInfo = async () => {
+  return get('/fetchHolidayInfo');
+};

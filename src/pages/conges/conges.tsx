@@ -15,12 +15,10 @@ const Conges: React.FC = () => {
     const [remainingHolidays, setRemainingHolidays] = useState<number | null>(null);
     const currentYear = new Date().getFullYear();
 
-    // Définir les dates minimum et maximum sélectionnables
     const minDate = new Date();
-    minDate.setDate(minDate.getDate() + 4); // Premier jour sélectionnable : dans 4 jours
-    const maxDate = new Date(currentYear, 11, 31); // Dernier jour sélectionnable : 31 décembre de l'année en cours
+    minDate.setDate(minDate.getDate() + 4); 
+    const maxDate = new Date(currentYear, 11, 31); 
 
-    // Chargement des informations de congé au montage du composant
     useEffect(() => {
       const loadHolidayInfo = async () => {
         try {
@@ -34,7 +32,6 @@ const Conges: React.FC = () => {
       loadHolidayInfo();
     }, []);
 
-    // Définir les jours fériés
     const holidays = [
         new Date(currentYear, 0, 1),  // Nouvel An
         new Date(currentYear, 4, 1),  // Fête du Travail

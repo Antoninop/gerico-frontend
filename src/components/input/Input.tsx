@@ -8,9 +8,10 @@ interface InputProps {
     value: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     required?: boolean;
+    disabled?: boolean; 
 }
 
-const Input: React.FC<InputProps> = ({ type, id, label, value, onChange, required = false }) => {
+const Input: React.FC<InputProps> = ({ type, id, label, value, onChange, required = false, disabled = false }) => {
     return (
         <div className={styles.inputGroup}>
             <label htmlFor={id}>{label}</label>
@@ -20,6 +21,7 @@ const Input: React.FC<InputProps> = ({ type, id, label, value, onChange, require
                 value={value}
                 onChange={onChange}
                 required={required}
+                disabled={disabled}  
                 className={styles.inputField}
             />
         </div>

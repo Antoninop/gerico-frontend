@@ -2,6 +2,7 @@ import './main.css';
 import Login from './pages/login/Login';
 import Conges from './pages/conges/conges';
 import Fiches from './pages/fiches/fiches';
+import Account from './pages/account/account';
 import Admin from './pages/admin/admin';
 import ForgotPassword from './pages/login/ForgotPassword/ForgotPassword';
 import PasswordRequest from './pages/login/PasswordRequest/PasswordRequest';
@@ -43,7 +44,7 @@ const AppRoutes: React.FC = () => {
           <Route path="/" element={<Navigate to="/fiches-paie" />} />
           <Route path="/fiches-paie" element={<Fiches />} />
           <Route path="/conges" element={<Conges />} />
-          <Route path="/compte" element={<div>Mon compte</div>} />
+          <Route path="/compte" element={<Account />} />
           <Route path="/administration" element={<Admin />} />
           <Route path="*" element={<div>Page non trouvée</div>} /> 
         </>

@@ -33,7 +33,9 @@ export const getToken = () => {
 };
 
 const nonToastableCalls: string[] = [
-  '/fetchPayroll'
+  '/fetchPayroll',
+  '/fetchHolidayInfo',
+  '/fetchAccountInfo'
 ];
 
 function toast_status(status: number, message: string | undefined, endpoint: string) {
@@ -146,3 +148,8 @@ export const fetchPayroll = async () => {
 export const fetchHolidayInfo = async () => {
   return get('/fetchHolidayInfo');
 };
+
+export const fetchAccountInfo = async () => {
+  return get('/fetchAccountInfo');
+};
+

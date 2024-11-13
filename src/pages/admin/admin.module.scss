@@ -1,0 +1,10 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: var(--navbar-height);
+    padding: var(--spacing-md);
+    padding-left: 5rem;
+    margin-left: 3rem;
+
+}

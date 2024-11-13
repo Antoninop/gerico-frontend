@@ -153,3 +153,13 @@ export const fetchAccountInfo = async () => {
   return get('/fetchAccountInfo');
 };
 
+export const fetchArchivedUsers = async () => {
+  return get('/fetchArchivedUsers');
+};
+
+export const fetchUsers = async () => {
+  return get('/fetchUsers');
+};
+
+
+

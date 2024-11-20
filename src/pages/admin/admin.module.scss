@@ -40,6 +40,10 @@
 .panel{
     background-color: white;
     width: 65rem;
+    min-height: 45rem;
+    max-height: 45rem;
+    overflow: hidden;
+    overflow-y: auto;   
     border-radius: var(--border-radius-lg);
     display: flex;
     justify-content: start;

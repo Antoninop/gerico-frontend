@@ -35,7 +35,9 @@ export const getToken = () => {
 const nonToastableCalls: string[] = [
   '/fetchPayroll',
   '/fetchHolidayInfo',
-  '/fetchAccountInfo'
+  '/fetchAccountInfo',
+  '/fetchUsers',
+  '/fetchArchivedUsers',
 ];
 
 function toast_status(status: number, message: string | undefined, endpoint: string) {

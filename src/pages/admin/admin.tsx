@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './admin.module.scss';
 import Navbar from '../../components/navbar/Navbar';
-import Security from './AdminPages/Security/Security';
+import Archivedlist from './AdminPages/Archivedlist/Archivedlist';
 import ManageConges from './AdminPages/ManageConges/ManageConges';
 import UserAdd from './AdminPages/Useradd/Useradd';
 import Userlist from './AdminPages/Userlist/Userlist';
@@ -22,7 +22,7 @@ const Admin: React.FC = () => {
             <li onClick={() => handlePageChange(ManageConges)}>Gestion des congès</li>
             <li onClick={() => handlePageChange(Userlist)}>Liste des salariés</li>
             <li onClick={() => handlePageChange(UserAdd)}>Ajouter un salarié</li>
-            <li onClick={() => handlePageChange(Security)}>Sécurité</li>
+            <li onClick={() => handlePageChange(Archivedlist)}>Archive des salariés </li>
           </ul>
         </div>
         <div className={styles.panel}>

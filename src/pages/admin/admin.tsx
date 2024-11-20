@@ -15,7 +15,7 @@ const Admin: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <Navbar />
+      <Navbar isDashboard={true} />
       <div className={styles.content}>
         <div className={styles.sidebar}>
           <ul>

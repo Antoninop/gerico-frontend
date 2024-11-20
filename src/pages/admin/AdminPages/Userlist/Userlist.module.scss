@@ -1,0 +1,51 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 4rem 3rem;
+}
+
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: var(  --font-size-large);
+    font-weight: 900;
+}
+
+
+
+.UsersData{
+    display: flex;
+    flex-direction: row;
+}
+
+.usernumbers{
+    font-size: 1.35rem;
+    margin-top: 3rem;
+    font-weight: 500;
+}
+
+
+.Arraytitles,
+.UsersData {
+  display: grid;
+  grid-template-columns: 4fr 4fr 2fr 1fr;
+  gap: 2.5rem; 
+  padding: 2rem 0;
+  align-items: center;
+  font-size: 1.1rem;
+}
+
+.Arraytitles{
+    padding: 1.5rem 0;
+    border-bottom: 2px solid #ddd;
+}
+
+.Username {
+  font-weight: 700;
+}
+
+.UsersData {
+  border-bottom: 1px solid #eee; 
+}

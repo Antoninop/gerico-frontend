@@ -1,10 +1,49 @@
 .container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: var(--navbar-height);
-    padding: var(--spacing-md);
-    padding-left: 5rem;
-    margin-left: 3rem;
-
+    flex-direction: column; 
+    margin: 0 auto;
 }
+
+.content{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: start;
+    gap: 5rem;
+    padding: 5rem;
+    background-color: var(--card-background-color);
+}
+
+.sidebar{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.15rem;
+    font-weight: 400;
+    border-radius: var(--border-radius-lg);
+
+    ul{
+            padding: 2rem 8rem;
+            padding-left: 2rem;
+    }
+
+    li{
+        margin: 1.25rem;
+        cursor: pointer;
+    }
+
+    li:hover{
+        color: var(--primary-color);
+    }
+}
+
+.panel{
+    background-color: white;
+    width: 65rem;
+    border-radius: var(--border-radius-lg);
+    display: flex;
+    justify-content: start;
+    align-items: start;
+}
+
+

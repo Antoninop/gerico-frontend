@@ -10,9 +10,9 @@
   --details-color: #f3a83c;
 
   --font-family-base: 'Roboto', sans-serif;
-  --font-size-base: 1.5rem; 
-  --font-size-small: 1rem; 
-  --font-size-large: 2.5rem; 
+  --font-size-base: 1rem; 
+  --font-size-small: .5rem; 
+  --font-size-large: 1.75rem; 
   --font-size-sidebar: 1.5rem;
   --font-size-sidebar-icon: 2rem;
   --line-height-base: 1.6;
@@ -28,6 +28,9 @@
   --footer-height: 6rem;
   --sidebar-width: 22.5rem;
 
+  --border-radius-md:.8rem;
+  --border-radius-lg:1rem;
+
 }
 
 html {
@@ -36,6 +39,9 @@ html {
   
 }
 
+ul {
+  list-style-type: none;
+}
 
 body{
   padding: 0rem;

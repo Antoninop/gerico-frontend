@@ -1,76 +1,36 @@
-import Dashboard from '../dashboard/dashboard';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import styles from './admin.module.scss';
-import { fetchArchivedUsers, fetchUsers } from '../../services/api';
+import Navbar from '../../components/navbar/Navbar';
+import Security from './AdminPages/Security/Security';
+import ManageConges from './AdminPages/ManageConges/ManageConges';
+import UserAdd from './AdminPages/Useradd/Useradd';
+import Userlist from './AdminPages/Userlist/Userlist';
 
 const Admin: React.FC = () => {
-    const [data, setData] = useState<any[]>([]);
-    const [databis, setDatabis] = useState<any[]>([]);
+  const [PageChosen, setPageChosen] = useState<React.FC>(() => ManageConges);
 
-    useEffect(() => {
-        const loadAdminInfo = async () => {
-            try {
-                const response = await fetchArchivedUsers();
-                setData(response); 
-                console.log(response); 
+  const handlePageChange = (page: React.FC) => {
+    setPageChosen(() => page);
+  };
 
-                const responsebis = await fetchUsers();
-                setDatabis(responsebis); 
-                console.log(responsebis); 
-
-            } catch (error) {
-                console.error('Erreur lors de la récupération des informations', error);
-            }
-        };
-
-        loadAdminInfo();
-    }, []);
-
-    return (
-        <div className={styles.container}>
-            <Dashboard />
-            
-            <h2>Archived Users</h2>
-            <div>
-                {data && data.length > 0 ? (
-                    data.map((user, index) => (
-                        <div key={index}>
-                            <p>First Name: {user.first_name}</p>
-                            <p>Last Name: {user.last_name}</p>
-                            <p>Email: {user.email}</p>
-                            <p>Position: {user.position}</p>
-                            <p>Hire Date: {user.hire_date}</p>
-                            <p>Salary: {user.salary}</p>
-                            <p>Is Admin: {user.is_admin ? "Yes" : "No"}</p>
-                            <hr />
-                        </div>
-                    ))
-                ) : (
-                    <p>No archived users found.</p>
-                )}
-            </div>
-
-            <h2>Current Users</h2>
-            <div>
-                {databis && databis.length > 0 ? (
-                    databis.map((user, index) => (
-                        <div key={index}>
-                            <p>First Name: {user.first_name}</p>
-                            <p>Last Name: {user.last_name}</p>
-                            <p>Email: {user.email}</p>
-                            <p>Position: {user.position}</p>
-                            <p>Hire Date: {user.hire_date}</p>
-                            <p>Salary: {user.salary}</p>
-                            <p>Is Admin: {user.is_admin ? "Yes" : "No"}</p>
-                            <hr />
-                        </div>
-                    ))
-                ) : (
-                    <p>No users found.</p>
-                )}
-            </div>
+  return (
+    <div className={styles.container}>
+      <Navbar />
+      <div className={styles.content}>
+        <div className={styles.sidebar}>
+          <ul>
+            <li onClick={() => handlePageChange(ManageConges)}>Gestion des congès</li>
+            <li onClick={() => handlePageChange(Userlist)}>Liste des salariés</li>
+            <li onClick={() => handlePageChange(UserAdd)}>Ajouter un salarié</li>
+            <li onClick={() => handlePageChange(Security)}>Sécurité</li>
+          </ul>
         </div>
-    );
+        <div className={styles.panel}>
+          <PageChosen />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Admin;

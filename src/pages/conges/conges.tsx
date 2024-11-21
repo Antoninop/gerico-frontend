@@ -13,8 +13,8 @@ const Conges: React.FC = () => {
 
   const [value, onChange] = useState<Value>(new Date());
   const [remainingHolidays, setRemainingHolidays] = useState<number | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false); // New state for button
-  const [errorMessage, setErrorMessage] = useState<string | null>(null); // State for errors
+  const [isSubmitting, setIsSubmitting] = useState(false); 
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const currentYear = new Date().getFullYear();
 
   const minDate = new Date();

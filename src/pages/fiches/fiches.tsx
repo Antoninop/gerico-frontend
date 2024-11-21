@@ -66,53 +66,56 @@ const Fiches: React.FC = () => {
     <div className={styles.container}>
       <Dashboard />
 
-      <div className={styles.payrollTitles}>
-        <div>Bonjour, {firstname} 👋</div>
-        <div className={styles.btnDLall}>Tout télécharger</div>
-      </div>
-      
-      <div className={styles.payrollsubTitles}>
-        <div>Fiches de paie</div>
-        <div className={styles.sortButton} onClick={toggleSortOrder}>
-          Trier par {sortOrder === 'desc' ? 'plus ancien' : 'plus récent'} 
-          {sortOrder === 'desc' ? <FaArrowDown /> : <FaArrowUp />} 
-        </div>
-      </div>
+      <div className={styles.content}>
 
-      {loading ? (  
-        <Loading />  
-      ) : (
-        sortedPayrollData.length > 0 ? (
-          <div className={styles.scrollableArea}>
-            <ul className={styles.payrollList}>
-              {sortedPayrollData.map((payroll) => {
-                const payDate = new Date(payroll.pay_date);
-                const month = payDate.toLocaleString('default', { month: 'short' }).toUpperCase(); 
-                const year = payDate.getFullYear(); 
-                return (
-                  <div className={styles.PayrollContainer} key={payroll.paye_id}>
-                    <div className={styles.PayrollDate}>
-                      <div>{month}</div>  
-                      <div>{year}</div>  
-                    </div>
-                    <li className={styles.payrollItem}>
-                      <span>Paie ID:</span> {payroll.paye_id} <br />
-                      <span>Salaire:</span> {payroll.salary} <br />
-                    </li>
-                    <div className={styles.dlbtn} 
-                      onClick={() => handleDownload(payroll.file_path)}
-                    >
-                      <GoDownload />
-                    </div>
-                  </div>
-                );
-              })}
-            </ul>
+        <div className={styles.header}>
+          <div>Bonjour, {firstname} 👋</div>
+          <div className={styles.btnDLall}>Tout télécharger</div>
+        </div>
+        
+        <div className={styles.payrollsubTitles}>
+          <div>Fiches de paie</div>
+          <div className={styles.sortButton} onClick={toggleSortOrder}>
+            Trier par {sortOrder === 'desc' ? 'plus ancien' : 'plus récent'} 
+            {sortOrder === 'desc' ? <FaArrowDown /> : <FaArrowUp />} 
           </div>
+        </div>
+
+        {loading ? (  
+          <Loading />  
         ) : (
-          <p>Aucune fiche de paie trouvée , revenez plus tard.</p>
-        )
-      )}
+          sortedPayrollData.length > 0 ? (
+            <div className={styles.scrollableArea}>
+              <ul className={styles.payrollList}>
+                {sortedPayrollData.map((payroll) => {
+                  const payDate = new Date(payroll.pay_date);
+                  const month = payDate.toLocaleString('default', { month: 'short' }).toUpperCase(); 
+                  const year = payDate.getFullYear(); 
+                  return (
+                    <div className={styles.PayrollContainer} key={payroll.paye_id}>
+                      <div className={styles.PayrollDate}>
+                        <div>{month}</div>  
+                        <div>{year}</div>  
+                      </div>
+                      <li className={styles.payrollItem}>
+                        <span>Paie ID:</span> {payroll.paye_id} <br />
+                        <span>Salaire:</span> {payroll.salary} <br />
+                      </li>
+                      <div className={styles.dlbtn} 
+                        onClick={() => handleDownload(payroll.file_path)}
+                      >
+                        <GoDownload />
+                      </div>
+                    </div>
+                  );
+                })}
+              </ul>
+            </div>
+          ) : (
+            <p>Aucune fiche de paie trouvée , revenez plus tard.</p>
+          )
+        )}
+      </div>
     </div>
   );
 };

@@ -27,39 +27,70 @@ const Account: React.FC = () => {
     }, []);
 
     return (
-        <div className={styles.container}>
-            <Dashboard />
-            {data ? (
-                
-            
-                <div>
-                <Input
-                type="text"
-                id="username"
-                label="Adresse mail"
-                value={data.email}
-                onChange={handlechange}
-                required
-                disabled={true} 
-                />
-                <Input
-                type="text"
-                id="username"
-                label="Nom"
-                value={data.email}
-                onChange={handlechange}
-                required
-                disabled={true}  
-                />
+    <div className={styles.container}>
+        <Dashboard />
 
-                    <div>Position: {data.position}</div>
-                    <div>Salaire: {data.salary}</div>
-                    <div>Date d\'embauche: {new Date(data.hire_date).toLocaleDateString()}</div>
-                </div>
-            ) : (
-                <p>Chargement...</p>
-            )}
-        </div>
+                    <div className={styles.content}>
+
+        
+            <div className={styles.header}>
+                <div>Mon compte</div>
+            </div>
+                {data ? (
+                    
+                    <div>
+                         <div className={styles.PasswordSection}>
+                            <Input
+                            type="text"
+                            id="username"
+                            label="Mot de passe"
+                            placeholder="********"
+                            onChange={handlechange}
+                            required
+                            />
+                            <Input
+                            type="text"
+                            id="username"
+                            label="Confirmation du mot de passe"
+                            placeholder="********"
+                            onChange={handlechange}
+                            required
+                            />
+                        </div>
+                        <Input
+                        type="text"
+                        id="username"
+                        label="Adresse email"
+                        value={data.email}
+                        disabled={true} 
+                        />
+                        <Input
+                        type="text"
+                        id="username"
+                        label="Nom et prénom"
+                        value={data.first_name + " " + data.last_name}
+                        disabled={true}  
+                        />
+                        <Input
+                        type="text"
+                        id="username"
+                        label="Poste"
+                        value={data.position}
+                        disabled={true}  
+                        />
+                        <Input
+                        type="text"
+                        id="username"
+                        label="Date d'embauche:"
+                        value={new Date(data.hire_date).toLocaleDateString()}
+                        disabled={true}  
+                        />
+                    </div>
+                ) : (
+                    <p>Chargement...</p>
+                )}
+            </div>
+            </div>
     );
 };
 

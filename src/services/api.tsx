@@ -135,6 +135,11 @@ export const get = async (endpoint: string) => {
   }
 };
 
+
+export const askHoliday = async (length: string, date: Date) => {
+  return post('/askHoliday', { length, date });
+};
+
 export const loginUser = async (email: string, password: string) => {
   return post('/login', { email, password });
 };

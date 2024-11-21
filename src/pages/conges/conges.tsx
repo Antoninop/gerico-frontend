@@ -5,80 +5,109 @@ import 'react-calendar/dist/Calendar.css';
 import styles from './conges.module.scss';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
-import { fetchHolidayInfo } from '../../services/api';
+import { fetchHolidayInfo, askHoliday } from '../../services/api';
 
 const Conges: React.FC = () => {
-    type ValuePiece = Date | null;
-    type Value = ValuePiece | [ValuePiece, ValuePiece];
-    
-    const [value, onChange] = useState<Value>(new Date());
-    const [remainingHolidays, setRemainingHolidays] = useState<number | null>(null);
-    const currentYear = new Date().getFullYear();
+  type ValuePiece = Date | null;
+  type Value = ValuePiece | [ValuePiece, ValuePiece];
 
-    const minDate = new Date();
-    minDate.setDate(minDate.getDate() + 4); 
-    const maxDate = new Date(currentYear, 11, 31); 
+  const [value, onChange] = useState<Value>(new Date());
+  const [remainingHolidays, setRemainingHolidays] = useState<number | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false); // New state for button
+  const [errorMessage, setErrorMessage] = useState<string | null>(null); // State for errors
+  const currentYear = new Date().getFullYear();
 
-    useEffect(() => {
-      const loadHolidayInfo = async () => {
-        try {
-          const response = await fetchHolidayInfo();
-          setRemainingHolidays(response.remaining_holidays); 
-        } catch (error) {
-          console.error("Erreur lors de la récupération des informations de congés :", error);
-        }
-      };
+  const minDate = new Date();
+  minDate.setDate(minDate.getDate() + 4);
+  const maxDate = new Date(currentYear, 11, 31);
 
-      loadHolidayInfo();
-    }, []);
+  useEffect(() => {
+    const loadHolidayInfo = async () => {
+      try {
+        const response = await fetchHolidayInfo();
+        setRemainingHolidays(response.remaining_holidays);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des informations de congés :', error);
+      }
+    };
 
-    const holidays = [
-        new Date(currentYear, 0, 1),  // Nouvel An
-        new Date(currentYear, 4, 1),  // Fête du Travail
-        new Date(currentYear, 4, 8),  // Victoire 1945
-        new Date(currentYear, 6, 14), // Fête Nationale
-        new Date(currentYear, 7, 15), // Assomption
-        new Date(currentYear, 10, 1), // Toussaint
-        new Date(currentYear, 10, 11), // Armistice
-        new Date(currentYear, 11, 25), // Noël
-    ];
+    loadHolidayInfo();
+  }, []);
 
-    const isHoliday = (date: Date) => holidays.some(holiday => holiday.toDateString() === date.toDateString());
+  const handleAskHoliday = async () => {
+    if (!(value instanceof Date)) {
+      setErrorMessage('Veuillez sélectionner une date valide.');
+      return;
+    }
+    setIsSubmitting(true);
+    setErrorMessage(null);
 
-    return (
-        <div className={styles.container}>
-            <Dashboard />
-            <div>
-                <div className={styles.title}>Ajouter un jour de congés</div>
-                <div className={styles.calendarSection}>
-                    <Calendar 
-                        className={styles.calendar}
-                        onChange={onChange} 
-                        value={value} 
-                        minDate={minDate} 
-                        maxDate={maxDate} 
-                        view="month" 
-                        maxDetail="month" 
-                        tileDisabled={({ date }) => 
-                            isHoliday(date) || 
-                            date.getDay() === 0 || 
-                            date.getDay() === 6
-                        }
-                        locale="fr-FR" 
-                    />
-                    <div className={styles.infoSection}>
-                        <div>Jour de congés restant : {remainingHolidays !== null ? remainingHolidays : 'Chargement...'}</div>
-                        <div>En attente :</div>
-                        <div>Validé :</div>
-                    </div>
-                </div>
-                <p>
-                    Date sélectionnée :{' '}
-                    {value instanceof Date ? format(value, 'dd/MM/yyyy', { locale: fr }) : 'Aucune date sélectionnée'}
-                </p>
-            </div>
+    try {
+      await askHoliday('half_day',value);
+      const response = await fetchHolidayInfo();
+      setRemainingHolidays(response.remaining_holidays);
+    } catch (error) {
+      console.error('Erreur lors de la demande de congés :', error);
+      setErrorMessage('Erreur lors de la soumission de la demande.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const holidays = [
+    new Date(currentYear, 0, 1), // Nouvel An
+    new Date(currentYear, 4, 1), // Fête du Travail
+    new Date(currentYear, 4, 8), // Victoire 1945
+    new Date(currentYear, 6, 14), // Fête Nationale
+    new Date(currentYear, 7, 15), // Assomption
+    new Date(currentYear, 10, 1), // Toussaint
+    new Date(currentYear, 10, 11), // Armistice
+    new Date(currentYear, 11, 25), // Noël
+  ];
+
+  const isHoliday = (date: Date) => holidays.some(holiday => holiday.toDateString() === date.toDateString());
+
+  return (
+    <div className={styles.container}>
+      <Dashboard />
+      <div>
+        <div className={styles.title}>Ajouter un jour de congés</div>
+        <div className={styles.calendarSection}>
+          <Calendar
+            className={styles.calendar}
+            onChange={onChange}
+            value={value}
+            minDate={minDate}
+            maxDate={maxDate}
+            view="month"
+            maxDetail="month"
+            tileDisabled={({ date }) =>
+              isHoliday(date) || date.getDay() === 0 || date.getDay() === 6
+            }
+            locale="fr-FR"
+          />
+          <div className={styles.infoSection}>
+            <div>Jour de congés restant : {remainingHolidays !== null ? remainingHolidays : 'Chargement...'}</div>
+            <div>En attente :</div>
+            <div>Validé :</div>
+          </div>
         </div>
-    );
+        <p>
+            Date sélectionnée :{' '}
+            {value instanceof Date ? format(value, 'yyyy-MM-dd', { locale: fr }) : 'Aucune date sélectionnée'}
+            </p>
+
+        {errorMessage && <p className={styles.error}>{errorMessage}</p>}
+        <button
+          onClick={handleAskHoliday}
+          disabled={isSubmitting || !(value instanceof Date)}
+          className={isSubmitting ? styles.loadingButton : ''}
+        >
+          {isSubmitting ? 'Envoi...' : 'Demander un congé'}
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default Conges;

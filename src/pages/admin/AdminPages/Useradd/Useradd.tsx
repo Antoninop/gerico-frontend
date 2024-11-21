@@ -5,8 +5,7 @@ const UserAdd: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <h1>User Add</h1>
-      
+      <div>User Add</div>
     </div>
   );
 };

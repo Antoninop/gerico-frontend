@@ -36,6 +36,9 @@ const Account: React.FC = () => {
             <div className={styles.header}>
                 <div>Mon compte</div>
             </div>
+            <div className={styles.subheader}>
+                <div>Mes informations</div>
+            </div>
                 {data ? (
                     
                     <div>

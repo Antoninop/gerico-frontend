@@ -153,7 +153,7 @@ export const fetchPayroll = async () => {
 };
 
 export const fetchHolidayInfo = async () => {
-  return get('/fetchHolidayInfo');
+  return get('/fetchHoliday');
 };
 
 export const fetchAccountInfo = async () => {
@@ -167,6 +167,11 @@ export const fetchArchivedUsers = async () => {
 export const fetchUsers = async () => {
   return get('/fetchUsers');
 };
+
+export const fetchAskedHoliday = async () => {
+  return get('/fetchAskedHoliday');
+};
+
 
 
 

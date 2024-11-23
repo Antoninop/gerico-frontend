@@ -7,35 +7,11 @@ import Admin from './pages/admin/admin';
 import ForgotPassword from './pages/login/ForgotPassword/ForgotPassword';
 import PasswordRequest from './pages/login/PasswordRequest/PasswordRequest';
 import NewPassword from './pages/login/NewPassword/NewPassword';
-import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
 import { useAuth } from './services/AuthContext';
-import { useEffect, useState } from 'react';
 
 const AppRoutes: React.FC = () => {
-  const { user, logout, isTokenExpired } = useAuth();
-  const [loading, setLoading] = useState(true);
-  const [showLoading, setShowLoading] = useState(false);
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  useEffect(() => {
-    const token = sessionStorage.getItem('token');
-    const timeoutId = setTimeout(() => setShowLoading(true), 3000);
-
-    if (!token || isTokenExpired()) {
-      logout();
-      setLoading(false);
-      navigate('/login');
-    } else {
-      setLoading(false);
-    }
-
-    return () => clearTimeout(timeoutId); 
-  }, [navigate, logout, isTokenExpired, location.pathname]);
-
-  if (loading) {
-    return showLoading ? <div>Chargement en cours...</div> : null;
-  }
+  const { user} = useAuth();
 
   return (
     <Routes>

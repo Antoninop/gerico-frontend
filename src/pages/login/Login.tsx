@@ -18,11 +18,12 @@ const Login: React.FC = () => {
         event.preventDefault();
         try {
             const response = await loginUser(email, password);
-            if (response.token) {
-                sessionStorage.setItem('token', response.token);
-                sessionStorage.setItem('firstname', response.firstname);
+            const data = response.data;
+            if (data.token) {
+                sessionStorage.setItem('token', data.token);
+                sessionStorage.setItem('firstname', data.firstname);
             }
-            await login({ id: response.userId, email }, response.token); 
+            await login({ id: data.userId, email }, data.token); 
             navigate('/'); 
         } catch (err: any) {
             console.error('Erreur de connexion:', err);

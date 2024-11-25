@@ -4,6 +4,8 @@ import Navbar from '../../../components/navbar/Navbar';
 import styles from './ForgotPassword.module.scss';
 import { IoMdFingerPrint,IoMdArrowBack } from "react-icons/io";
 import {useNavigate } from 'react-router-dom';
+import { sendCodeResetPass } from '../../../services/api';
+
 
 const ForgotPassword: React.FC = () => {
 
@@ -13,6 +15,7 @@ const ForgotPassword: React.FC = () => {
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         try {
+            sendCodeResetPass(email);
             navigate('/confirmation-renit', { state: { email } });
         } catch (err: any) {
             console.error('Erreur de connexion:', err);

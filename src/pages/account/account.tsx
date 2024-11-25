@@ -16,7 +16,8 @@ const Account: React.FC = () => {
         const loadAccountInfo = async () => {
             try {
                 const response = await fetchAccountInfo();
-                setData(response); 
+                const data = response.data;
+                setData(data); 
                 console.log(response); 
             } catch (error) {
                 console.error('Erreur lors de la récupération des informations', error);
@@ -65,12 +66,12 @@ const Account: React.FC = () => {
                         id="username"
                         label="Adresse email"
                         value={data.email}
-                        disabled={true} 
+                        disabled={false} 
                         />
                         <Input
                         type="text"
                         id="username"
-                        label="Nom et prénom"
+                        label="Prénom et nom"
                         value={data.first_name + " " + data.last_name}
                         disabled={true}  
                         />

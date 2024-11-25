@@ -97,9 +97,8 @@ export const post = async (endpoint: string, data: any) => {
     const successMessage = responseData.message || 'Opération réussie !';
     toast_status(response.status, successMessage, endpoint);
 
-    return responseData;
+    return { status: response.status, data: responseData };
   } catch (error) {
-    toast_status(500, 'Erreur lors de la requête POST', endpoint);
     console.error('Erreur lors de la requête POST:', error);
     throw error;
   }
@@ -127,9 +126,8 @@ export const get = async (endpoint: string) => {
     const successMessage = responseData.message || 'Opération réussie !';
     toast_status(response.status, successMessage, endpoint);
 
-    return responseData;
+    return { status: response.status, data: responseData };
   } catch (error) {
-    toast_status(500, 'Erreur lors de la requête GET', endpoint);
     console.error('Erreur lors de la requête GET:', error);
     throw error;
   }
@@ -172,6 +170,13 @@ export const fetchAskedHoliday = async () => {
   return get('/fetchAskedHoliday');
 };
 
+export const sendCodeResetPass = async (email: string) => {
+  return post('/sendCodeResetPass', { email });
+};
+
+export const verifyCodeResetPass = async (email: string, code: string) => {
+  return post('/verifyCodeResetPass', { email, code });
+};
 
 
 

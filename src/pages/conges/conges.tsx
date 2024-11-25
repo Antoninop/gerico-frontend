@@ -27,14 +27,15 @@ const Conges: React.FC = () => {
     const loadHolidayInfo = async () => {
       try {
         const response = await fetchHolidayInfo();
-        setRemainingHolidays(response.remaining_holidays);
+        const data = response.data;
+        setRemainingHolidays(data.remaining_holidays);
 
         const formatHoliday = (holidays: { date: string; length: string }[]) =>
           holidays.map(holiday => `${format(new Date(holiday.date), 'd MMMM', { locale: fr })} (${holiday.length === 'half_day' ? 'Demi-journée' : 'Journée complète'})`);
 
-        setPendingHolidays(formatHoliday(response.holidays.pending));
-        setAcceptedHolidays(formatHoliday(response.holidays.approved));
-        setDeniedHolidays(formatHoliday(response.holidays.denied));
+        setPendingHolidays(formatHoliday(data.holidays.pending));
+        setAcceptedHolidays(formatHoliday(data.holidays.approved));
+        setDeniedHolidays(formatHoliday(data.holidays.denied));
       } catch (error) {
         console.error('Erreur lors de la récupération des informations de congés :', error);
       }
@@ -56,14 +57,16 @@ const Conges: React.FC = () => {
       await askHoliday('half_day', formattedDate); 
 
       const response = await fetchHolidayInfo();
-      setRemainingHolidays(response.remaining_holidays);
+      const data = response.data;
+
+      setRemainingHolidays(data.remaining_holidays);
 
       const formatHoliday = (holidays: { date: string; length: string }[]) =>
         holidays.map(holiday => `${format(new Date(holiday.date), 'd MMMM', { locale: fr })} (${holiday.length === 'half_day' ? 'Demi-journée' : 'Journée complète'})`);
 
-      setPendingHolidays(formatHoliday(response.holidays.pending));
-      setAcceptedHolidays(formatHoliday(response.holidays.approved));
-      setDeniedHolidays(formatHoliday(response.holidays.denied));
+      setPendingHolidays(formatHoliday(data.holidays.pending));
+      setAcceptedHolidays(formatHoliday(data.holidays.approved));
+      setDeniedHolidays(formatHoliday(data.holidays.denied));
     } catch (error) {
       console.error('Erreur lors de la demande de congés :', error);
       setErrorMessage('Erreur lors de la soumission de la demande.');

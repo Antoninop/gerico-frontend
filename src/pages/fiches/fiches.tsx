@@ -23,8 +23,10 @@ const Fiches: React.FC = () => {
     const fetchPayrollData = async () => {
       try {
         const response = await fetchPayroll();  
-        if (response?.results) {
-          setPayrollData(response.results);  
+        const data = response.data.results;
+
+        if (data) {
+          setPayrollData(data);  
         } else {
           console.error("No payroll data found.");
         }

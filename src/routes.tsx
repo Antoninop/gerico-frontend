@@ -22,7 +22,7 @@ const AppRoutes: React.FC = () => {
           <Route path="/conges" element={<Conges />} />
           <Route path="/compte" element={<Account />} />
           <Route path="/administration" element={<Admin />} />
-          <Route path="*" element={<div>Page non trouvée</div>} /> 
+          <Route path="*" element={<Navigate to="/fiches-paie" />} /> 
         </>
       ) : (
         <>

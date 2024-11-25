@@ -4,12 +4,13 @@ import styles from './PasswordRequest.module.scss';
 import { IoMdArrowBack } from "react-icons/io";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { IoMailOpenOutline } from "react-icons/io5";
+import {verifyCodeResetPass} from '../../../services/api';
 
 const PasswordRequest: React.FC = () => {
     const [code, setCode] = useState<string[]>(Array(5).fill(''));
     const navigate = useNavigate();
     const location = useLocation();
-    const email = location.state?.email || 'adresse@email';
+    const email = location.state?.email || 'adresse@email.com';
 
     const handleChange = (value: string, index: number) => {
         if (/^\d$/.test(value) || value === '') { 
@@ -31,9 +32,11 @@ const PasswordRequest: React.FC = () => {
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-        console.log("Code:", code.join(''));
         try {
-            navigate('/nouveau-motdepasse');
+            const response = await verifyCodeResetPass(email, code.join(''));
+            if (response.status === 200){
+                navigate('/nouveau-motdepasse');
+            }
         } catch (err: any) {
             console.error('Erreur de connexion:', err);
         }

@@ -1,0 +1,14 @@
+.customtooltip {
+    background-color: white !important; /* Exemple de couleur */
+    color: black !important;
+    font-size: 1.25rem !important;
+    border-radius: .5rem !important;
+    padding: .75rem !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15) !important;
+
+  }
+  
+  .customtooltip .react-tooltip-arrow {
+    border-color: transparent !important; /* Couleur de la flèche */
+  }
+  

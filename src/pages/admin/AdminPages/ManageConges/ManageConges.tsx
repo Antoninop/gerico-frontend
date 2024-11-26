@@ -10,7 +10,8 @@ const ManageConges: React.FC = () => {
     const loadCongesData = async () => {
       try {
         const response = await fetchAskedHoliday();
-        setData(response?.users || []);
+        const data = response.data;
+        setData(data?.users || []);
         console.log("Data fetched: ", response);
       } catch (error) {
         console.error('Erreur lors de la récupération des informations', error);

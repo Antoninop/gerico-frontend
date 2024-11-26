@@ -92,8 +92,11 @@ const Conges: React.FC = () => {
   return (
     <div className={styles.container}>
       <Dashboard />
-      <div>
-        <div className={styles.title}>Ajouter un jour de congés</div>
+      <div className={styles.content} >
+        <div className={styles.header}>
+          <div>Bonjour</div>
+        </div>
+        <div className={styles.subtitle}>Ajouter un jour de congés</div>
         <div className={styles.calendarSection}>
           <Calendar
             className={styles.calendar}

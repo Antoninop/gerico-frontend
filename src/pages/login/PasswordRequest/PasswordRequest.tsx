@@ -34,13 +34,15 @@ const PasswordRequest: React.FC = () => {
         event.preventDefault();
         try {
             const response = await verifyCodeResetPass(email, code.join(''));
-            if (response.status === 200){
-                navigate('/nouveau-motdepasse');
+            if (response.status === 200) {
+                const id = response.data.id; 
+                navigate(`/nouveau-motdepasse`, { state: { email , id } });
             }
         } catch (err: any) {
             console.error('Erreur de connexion:', err);
         }
     };
+    
 
     const handleBacklogin = () => {
         navigate('/login');

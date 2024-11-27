@@ -189,4 +189,7 @@ export const verifyCodeResetPass = async (email: string, code: string) => {
 };
 
 
+export const Newpassword = async (email: string, id: string , password : string) => {
+  return post('/Newpassword', { email, id , password });
+};
 

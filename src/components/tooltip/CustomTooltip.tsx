@@ -14,7 +14,7 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({ id, children, place = 'to
     <Tooltip
       id={id}
       place={place}
-      clickable={true} // Permet de cliquer sur le contenu
+      clickable={true} 
       className={styles.customtooltip} 
     >
       {children}

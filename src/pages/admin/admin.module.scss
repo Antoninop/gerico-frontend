@@ -26,18 +26,24 @@
             padding: 2rem 8rem;
             padding-left: 2rem;
     }
-
-    li{
-        margin: 1.25rem;
-        cursor: pointer;
-    }
-
-    li:hover{
-        color: var(--primary-color);
-    }
 }
 
-.panel{
+.sidebar li {
+    margin: 1.25rem;
+    cursor: pointer;
+    font-weight: 400;
+
+  }
+  
+  .sidebar li:hover {
+    color: var(--primary-color);
+  }
+  
+  .sidebar li.active {
+    color: var(--primary-color);
+  }
+  
+  .panel{
     background-color: white;
     width: 65rem;
     min-height: 45rem;
@@ -49,5 +55,3 @@
     justify-content: start;
     align-items: start;
 }
-
-

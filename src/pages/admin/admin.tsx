@@ -8,9 +8,11 @@ import Userlist from './AdminPages/Userlist/Userlist';
 
 const Admin: React.FC = () => {
   const [PageChosen, setPageChosen] = useState<React.FC>(() => ManageConges);
+  const [activePage, setActivePage] = useState<string>('ManageConges');
 
-  const handlePageChange = (page: React.FC) => {
+  const handlePageChange = (page: React.FC, pageName: string) => {
     setPageChosen(() => page);
+    setActivePage(pageName);
   };
 
   return (
@@ -19,10 +21,30 @@ const Admin: React.FC = () => {
       <div className={styles.content}>
         <div className={styles.sidebar}>
           <ul>
-            <li onClick={() => handlePageChange(ManageConges)}>Gestion des congès</li>
-            <li onClick={() => handlePageChange(Userlist)}>Liste des salariés</li>
-            <li onClick={() => handlePageChange(UserAdd)}>Ajouter un salarié</li>
-            <li onClick={() => handlePageChange(Archivedlist)}>Archive des salariés </li>
+            <li
+              className={activePage === 'ManageConges' ? styles.active : ''}
+              onClick={() => handlePageChange(ManageConges, 'ManageConges')}
+            >
+              Gestion des congès
+            </li>
+            <li
+              className={activePage === 'Userlist' ? styles.active : ''}
+              onClick={() => handlePageChange(Userlist, 'Userlist')}
+            >
+              Liste des salariés
+            </li>
+            <li
+              className={activePage === 'UserAdd' ? styles.active : ''}
+              onClick={() => handlePageChange(UserAdd, 'UserAdd')}
+            >
+              Ajouter un salarié
+            </li>
+            <li
+              className={activePage === 'Archivedlist' ? styles.active : ''}
+              onClick={() => handlePageChange(Archivedlist, 'Archivedlist')}
+            >
+              Archive des salariés
+            </li>
           </ul>
         </div>
         <div className={styles.panel}>

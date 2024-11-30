@@ -49,3 +49,21 @@
 .UsersData {
   border-bottom: 1px solid #eee; 
 }
+
+.tooltipMenu {
+  div {
+    display: flex; 
+    align-items: center; 
+    margin: 0.5rem;
+  }
+
+  div:hover {
+    color: var(--primary-color);
+    cursor: pointer;
+  }
+
+  svg {
+    font-size: 1.3rem;
+    margin-right: 0.5rem;
+  }
+}

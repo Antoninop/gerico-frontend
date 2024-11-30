@@ -16,15 +16,14 @@ const Dashboard: React.FC = () => {
         logout();
     };
 
-    // Vérifiez si l'utilisateur est en train de se charger
     if (loading) {
-        console.log("Loading user data..."); // Debugging: vérifier si on est en mode de chargement
+        console.log("Loading user data..."); 
         return <div>Loading...</div>;
     }
 
-    console.log("User data: ", user); // Debugging: afficher les données utilisateur
+    console.log("User data: ", user); 
     const isAdmin = user?.isAdmin;
-    console.log("Is user admin? ", isAdmin); // Vérifier si isAdmin est bien défini
+    console.log("Is user admin? ", isAdmin); 
 
     const items = [
         { label: <><IoDocument /> Mes fiches de paie</>, route: '/fiches-paie' },
@@ -34,11 +33,11 @@ const Dashboard: React.FC = () => {
     ];
 
     useEffect(() => {
-        console.log("current user: ", user); // Debugging
+        console.log("current user: ", user); 
         const currentRoute = location.pathname;
         const selectedIndex = items.findIndex(item => item.route === currentRoute);
         setSelectedItem(selectedIndex !== -1 ? selectedIndex : null);
-    }, [location.pathname, user]); // Ajoutez 'user' dans les dépendances pour re-render lors de la mise à jour
+    }, [location.pathname, user]); 
 
     const handleNavigate = (route: string) => {
         navigate(route);

@@ -24,9 +24,13 @@ const Userlist: React.FC = () => {
     }
   };
 
-  const handleArchiveUser = (email: string) => {
-    archiveUser(email); 
-    loadAdminInfo();
+  const handleArchiveUser = async (email: string) => {
+    try {
+      await archiveUser(email); 
+      loadAdminInfo();
+    } catch (error) {
+      console.error('Erreur lors de la désarchivation', error);
+    }
   }
 
   const filteredData = Userdata.filter(

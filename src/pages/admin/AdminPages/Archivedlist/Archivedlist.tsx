@@ -92,7 +92,7 @@ const Archivedlist: React.FC = () => {
                       <FaPen/>Modifier
                     </div>
                     <div onClick={() => handleUnArchiveUser(user.email)}>
-                      <MdArchive/>DésArchiver
+                      <MdArchive/>Désarchiver
                     </div>
                   </div>
                 </CustomTooltip>

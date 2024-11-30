@@ -11,7 +11,7 @@ const Login: React.FC = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [error, setError] = useState<string>(''); 
-    const { login } = useAuth(); 
+    const {login } = useAuth(); 
     const navigate = useNavigate();
 
     const handleSubmit = async (event: React.FormEvent) => {
@@ -21,9 +21,8 @@ const Login: React.FC = () => {
             const data = response.data;
             if (data.token) {
                 sessionStorage.setItem('token', data.token);
-                sessionStorage.setItem('firstname', data.firstname);
             }
-            await login({ id: data.userId, email }, data.token); 
+            await login(data.token); 
             navigate('/'); 
         } catch (err: any) {
             console.error('Erreur de connexion:', err);

@@ -1,43 +1,75 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 
+interface User {
+  id: string;
+  firstName?: string;
+  isAdmin?: boolean;
+}
+
 interface AuthContextType {
-  user: { id: number; email?: string } | null;
-  login: (userData: { id: number; email: string }, token: string) => void;
+  user: User | null;
+  login: (token: string) => void;
   logout: () => void;
   isTokenExpired: () => boolean;
+  loading: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const isTokenExpired = (token: string) => {
+const isTokenExpired = (token: string): boolean => {
   try {
     const payload = JSON.parse(atob(token.split('.')[1]));
     const expiry = payload.exp;
     return Math.floor(Date.now() / 1000) >= expiry;
   } catch (error) {
-    return true;
+    return true; 
+  }
+};
+
+const getUserFromToken = (token: string): User | null => {
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return {
+      id: payload.sub,
+      firstName: payload.firstname,
+      isAdmin: payload.admin === 1,
+    };
+  } catch (error) {
+    return null; 
   }
 };
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<{ id: number; email?: string } | null>(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const token = sessionStorage.getItem('token');
-    const userId = sessionStorage.getItem('userId');
-
     if (token) {
       if (isTokenExpired(token)) {
-        logout(); 
+        logout();
       } else {
-        setUser({ id: Number(userId)});
+        const userData = getUserFromToken(token);
+        if (userData) {
+          setUser(userData);
+        } else {
+          logout();
+        }
       }
     }
+    setLoading(false);
   }, []);
 
-  const login = (userData: { id: number; email: string }, token: string) => {
-    setUser(userData);
-    sessionStorage.setItem('token', token);
+  const login = (token: string) => {
+    const userData = getUserFromToken(token);
+    if (userData) {
+      setUser(userData);
+      sessionStorage.setItem('token', token);
+      sessionStorage.setItem('firstname', userData.firstName || '');
+    } else {
+      console.error('Invalid token');
+      logout(); 
+    }
   };
 
   const logout = () => {
@@ -47,7 +79,15 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, isTokenExpired: () => isTokenExpired(sessionStorage.getItem('token') || '') }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        login,
+        logout,
+        isTokenExpired: () => isTokenExpired(sessionStorage.getItem('token') || ''),
+        loading,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
@@ -56,7 +96,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error();
+    throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;
 };

@@ -193,3 +193,6 @@ export const Newpassword = async (email: string, id: string , password : string)
   return post('/Newpassword', { email, id , password });
 };
 
+export const sendInvitation = async (email:string) => {
+  return post('/sendInvitation', {email});
+};

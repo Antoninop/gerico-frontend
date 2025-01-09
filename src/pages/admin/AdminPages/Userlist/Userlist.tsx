@@ -29,7 +29,7 @@ const Userlist: React.FC = () => {
       await archiveUser(email); 
       loadAdminInfo();
     } catch (error) {
-      console.error('Erreur lors de la désarchivation', error);
+      console.error(error);
     }
   }
 
@@ -43,7 +43,7 @@ const Userlist: React.FC = () => {
     <div className={styles.container}>
       <div className={styles.header}>
         <div>Liste des salariés</div>
-        <div>
+      <div>
           <input
             type="text"
             placeholder="Rechercher"
